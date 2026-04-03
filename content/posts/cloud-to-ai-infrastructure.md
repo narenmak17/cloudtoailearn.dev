@@ -1,6 +1,6 @@
 ---
 title: "From Cloud to Cognition: Architecting AI-Ready Infrastructure"
-date: 2025-06-01
+date: 2026-04-01
 draft: false
 author: "Naren"
 description: "How cloud architects must evolve their thinking to support AI workloads at scale — and what that means for the infrastructure you build today."
