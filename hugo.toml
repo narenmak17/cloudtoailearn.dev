@@ -1,0 +1,39 @@
+baseURL = 'http://localhost:1313/'
+languageCode = 'en-gb'
+title = 'CloudToAILearn'
+theme = 'awesome-hugo'
+
+[params]
+  description = "Cloud Architecture · AI Systems · Hands-on Learning"
+  author = "Naren"
+  homeInfoTitle = "Welcome to CloudToAILearn"
+  homeInfoContent = "Practical insights on Cloud Architecture, AI Systems, and hands-on demos by a Cloud Architect with 15+ years of experience."
+
+[menu]
+  [[menu.main]]
+    name = "Home"
+    url = "/"
+    weight = 1
+  [[menu.main]]
+    name = "Posts"
+    url = "/posts/"
+    weight = 2
+  [[menu.main]]
+    name = "Tags"
+    url = "/tags/"
+    weight = 3
+  [[menu.main]]
+    name = "About"
+    url = "/about/"
+    weight = 4
+
+[taxonomies]
+  tag = "tags"
+  category = "categories"
+
+[params.categories]
+  cloud = "☁️ Cloud"
+  ai = "🤖 AI"
+  resiliency = "🛡️ Resiliency"
+  cost-optimization = "💰 Cost Optimization"
+  patterns = "🧩 Patterns"
