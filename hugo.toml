@@ -1,4 +1,4 @@
-baseURL = 'https://learnnshare.me/'
+baseURL = 'https://cloudtoailearn.dev/'
 languageCode = 'en-gb'
 title = 'CloudToAILearn'
 theme = 'awesome-hugo'
