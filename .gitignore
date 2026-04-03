@@ -1,0 +1,13 @@
+# Hugo build output - never commit this, GitHub Actions builds it
+public/
+
+# Hugo lock file
+.hugo_build.lock
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Editor
+.vscode/
+.idea/
