@@ -1,0 +1,39 @@
+{{ define "main" }}
+
+<!-- HERO -->
+<div class="hero">
+    <h1>{{ .Site.Params.homeInfoTitle }}</h1>
+    <p>{{ .Site.Params.homeInfoContent }}</p>
+</div>
+
+<!-- LATEST POSTS -->
+<div class="section-heading">Latest Posts</div>
+
+<ul class="post-list">
+    {{ range (where .Site.RegularPages "Section" "posts") }}
+    {{ $cat := index .Params.categories 0 | default "cloud" | lower }}
+    <li class="post-item"
+        data-category="{{ $cat }}"
+        data-title="{{ .Title }}"
+        data-url="{{ .Permalink }}">
+        <div class="post-meta">
+            <span>{{ .Date.Format "Jan 2, 2006" }}</span>
+            <span>· {{ .ReadingTime }} min read</span>
+            <span class="post-cat-label">{{ $cat | title }}</span>
+        </div>
+        <h2><a href="{{ .Permalink }}">{{ .Title }}</a></h2>
+        <p class="post-summary">{{ .Summary | truncate 160 }}</p>
+        <div class="tags">
+            {{ range .Params.tags }}
+            <a class="tag" href="/tags/{{ . | urlize }}/">#{{ . }}</a>
+            {{ end }}
+        </div>
+        <br>
+        <a class="read-more" href="{{ .Permalink }}">Read more →</a>
+    </li>
+    {{ else }}
+    <li style="color:#aaa; padding:2rem 0; text-align:center;">No posts yet. Check back soon!</li>
+    {{ end }}
+</ul>
+
+{{ end }}

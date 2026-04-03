@@ -1,7 +1,6 @@
 baseURL = 'https://cloudtoailearn.dev/'
 languageCode = 'en-gb'
 title = 'CloudToAILearn'
-theme = 'awesome-hugo'
 
 [params]
   description = "Cloud Architecture · AI Systems · Hands-on Learning"

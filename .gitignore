@@ -1,5 +1,8 @@
-# Hugo build output - never commit this, GitHub Actions builds it
+# Hugo build output
 public/
+
+# Theme folder - layouts moved to project level, theme not needed
+themes/
 
 # Hugo lock file
 .hugo_build.lock
@@ -11,3 +14,6 @@ Thumbs.db
 # Editor
 .vscode/
 .idea/
+
+# Fix script
+fix_theme.bat

@@ -1,0 +1,71 @@
+<!-- SIDEBAR SEARCH -->
+<div class="sb-search-wrap">
+    <span class="sb-search-icon">🔍</span>
+    <input class="sb-search" id="sbSearch" type="text" placeholder="Search posts...">
+    <ul class="search-results" id="searchResults"></ul>
+</div>
+
+<hr class="sb-divider">
+
+<!-- POSTS BY MONTH -->
+<div class="sb-title">Archive</div>
+
+{{ $posts := where .Site.RegularPages "Section" "posts" }}
+{{ $byMonth := dict }}
+
+{{ range $posts }}
+    {{ $monthKey := .Date.Format "January 2006" }}
+    {{ $existing := index $byMonth $monthKey }}
+    {{ if $existing }}
+        {{ $byMonth = merge $byMonth (dict $monthKey (append $existing .)) }}
+    {{ else }}
+        {{ $byMonth = merge $byMonth (dict $monthKey (slice .)) }}
+    {{ end }}
+{{ end }}
+
+{{ range $month, $monthPosts := $byMonth }}
+<div class="month-group">
+    <button class="month-toggle">
+        <span>{{ $month }}</span>
+        <span class="badge">{{ len $monthPosts }}</span>
+        <span class="arrow">▶</span>
+    </button>
+    <ul class="month-posts">
+        {{ range $monthPosts }}
+        <li>
+            <a href="{{ .Permalink }}" title="{{ .Title }}">
+                {{ .Title | truncate 40 }}
+            </a>
+        </li>
+        {{ end }}
+    </ul>
+</div>
+{{ end }}
+
+{{ if not $posts }}
+<p style="font-size:0.8rem; color:#aaa; padding: 0.5rem 0;">No posts yet.</p>
+{{ end }}
+
+<hr class="sb-divider">
+
+<!-- TAGS CLOUD -->
+<div class="sb-title">Topics</div>
+<div class="sb-tags">
+    {{ range .Site.Taxonomies.tags.ByCount }}
+    <a class="sb-tag" href="/tags/{{ .Page.Title | urlize }}/">
+        #{{ .Page.Title }} ({{ .Count }})
+    </a>
+    {{ end }}
+</div>
+
+<hr class="sb-divider">
+
+<!-- CATEGORIES QUICK LINKS -->
+<div class="sb-title">Categories</div>
+<ul style="list-style:none;">
+    <li style="margin-bottom:0.4rem;"><a class="sb-tag" href="#">☁️ Cloud</a></li>
+    <li style="margin-bottom:0.4rem;"><a class="sb-tag" href="#">🤖 AI</a></li>
+    <li style="margin-bottom:0.4rem;"><a class="sb-tag" href="#">🛡️ Resiliency</a></li>
+    <li style="margin-bottom:0.4rem;"><a class="sb-tag" href="#">💰 Cost Optimization</a></li>
+    <li style="margin-bottom:0.4rem;"><a class="sb-tag" href="#">🧩 Patterns</a></li>
+</ul>

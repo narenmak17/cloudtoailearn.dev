@@ -1,0 +1,37 @@
+{{ define "title" }}{{ .Title }} · {{ .Site.Title }}{{ end }}
+
+{{ define "main" }}
+
+<div style="margin-bottom:1.5rem;">
+    <h1 style="font-size:1.6rem; margin-bottom:0.3rem;">All Posts</h1>
+    <p style="color:#aaa; font-size:0.85rem;">{{ len .Pages }} articles on Cloud Architecture, AI Systems & hands-on demos</p>
+</div>
+
+<ul class="post-list">
+    {{ range .Pages }}
+    {{ $cat := index .Params.categories 0 | default "cloud" | lower }}
+    <li class="post-item"
+        data-category="{{ $cat }}"
+        data-title="{{ .Title }}"
+        data-url="{{ .Permalink }}">
+        <div class="post-meta">
+            <span>{{ .Date.Format "Jan 2, 2006" }}</span>
+            <span>· {{ .ReadingTime }} min read</span>
+            <span class="post-cat-label">{{ $cat | title }}</span>
+        </div>
+        <h2><a href="{{ .Permalink }}">{{ .Title }}</a></h2>
+        <p class="post-summary">{{ .Summary | truncate 180 }}</p>
+        <div class="tags">
+            {{ range .Params.tags }}
+            <a class="tag" href="/tags/{{ . | urlize }}/">#{{ . }}</a>
+            {{ end }}
+        </div>
+        <br>
+        <a class="read-more" href="{{ .Permalink }}">Read more →</a>
+    </li>
+    {{ else }}
+    <li style="color:#aaa; padding:2rem 0; text-align:center;">No posts published yet.</li>
+    {{ end }}
+</ul>
+
+{{ end }}

@@ -1,0 +1,43 @@
+{{ define "title" }}{{ .Title }} · {{ .Site.Title }}{{ end }}
+
+{{ define "main" }}
+<article>
+
+    <!-- POST HEADER -->
+    <div class="post-header">
+        <div class="post-meta">
+            <span>{{ .Date.Format "January 2, 2006" }}</span>
+            {{ with .Params.author }}<span>· {{ . }}</span>{{ end }}
+            <span>· {{ .ReadingTime }} min read</span>
+            {{ with index .Params.categories 0 }}
+            <span class="post-cat-label">{{ . | title }}</span>
+            {{ end }}
+        </div>
+        <h1>{{ .Title }}</h1>
+        {{ with .Params.description }}
+        <p style="color:#666; font-size:1rem; margin-top:0.5rem; line-height:1.6;">{{ . }}</p>
+        {{ end }}
+        <div class="tags" style="margin-top:0.8rem;">
+            {{ range .Params.tags }}
+            <a class="tag" href="/tags/{{ . | urlize }}/">#{{ . }}</a>
+            {{ end }}
+        </div>
+    </div>
+
+    <!-- COVER IMAGE -->
+    {{ with .Params.cover }}
+    <img class="post-cover" src="{{ . }}" alt="{{ $.Title }}">
+    {{ end }}
+
+    <!-- POST BODY -->
+    <div class="post-content">
+        {{ .Content }}
+    </div>
+
+    <!-- BACK LINK -->
+    <div style="margin-top:2.5rem; padding-top:1.2rem; border-top:1px solid #f0f0f0;">
+        <a href="/posts/" style="color:#0070f3; text-decoration:none; font-size:0.88rem; font-weight:500;">← Back to all posts</a>
+    </div>
+
+</article>
+{{ end }}
