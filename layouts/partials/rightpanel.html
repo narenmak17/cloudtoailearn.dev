@@ -1,37 +1,19 @@
 <!-- ── RIGHT PANEL ── -->
 
-<!-- HEATMAP: TOP 20 POSTS -->
-<div class="rp-section">
-    <div class="rp-title">🔥 Most Visited</div>
-    <div class="rp-subtitle">Click any tile to open post</div>
-    <div class="heatmap-grid" id="heatmapGrid">
-        {{ $posts := where .Site.RegularPages "Section" "posts" }}
-        {{ range first 20 $posts }}
-        {{ $short := .Params.shortname | default (.Title | truncate 18) }}
-        <a class="hm-tile"
-           href="{{ .Permalink }}"
-           data-url="{{ .Permalink }}"
-           data-title="{{ .Title }}"
-           title="{{ .Title }}"
-           onclick="trackVisit('{{ .Permalink }}')">
-            <span class="hm-label">{{ $short }}</span>
-            <span class="hm-count" id="count-{{ .Permalink | urlize }}">0</span>
-        </a>
-        {{ end }}
-    </div>
-    <div style="font-size:0.7rem;color:#bbb;margin-top:0.6rem;text-align:center;">Darker = more visits · tracked locally</div>
-</div>
+<!-- HEATMAP: TOP 20 POSTS — only shown on home page via index.html block -->
+{{ block "rightpanel-heatmap" . }}{{ end }}
 
-<hr class="rp-divider">
-
-<!-- TECH FACTS & AUTHORITATIVE LINKS -->
+<!-- TECH SPOTLIGHT -->
 <div class="rp-section">
     <div class="rp-title">💡 Tech Spotlight</div>
-    <div class="tech-fact-card" id="techFact">
-        <!-- rotated by JS -->
+    <div class="spotlight-counter">
+        <span id="spotlightProgress"></span>
+        <span id="spotlightReset" style="color:#bbb;font-size:0.65rem;"></span>
     </div>
-    <div style="text-align:right;margin-top:0.4rem;">
-        <button class="fact-next-btn" onclick="nextFact()">Next fact →</button>
+    <div class="tech-fact-card" id="techFact"></div>
+    <div class="spotlight-nav">
+        <button class="fact-nav-btn" onclick="prevFact()">← Prev</button>
+        <button class="fact-nav-btn" onclick="nextFact()">Next →</button>
     </div>
 </div>
 
@@ -73,34 +55,28 @@ function renderHeatmap() {
     const visits = getVisits();
     const tiles = document.querySelectorAll('.hm-tile');
     if (!tiles.length) return;
-
-    // find max for relative intensity
     let max = 1;
     tiles.forEach(tile => {
-        const url = tile.dataset.url;
-        if (visits[url] && visits[url] > max) max = visits[url];
+        const c = visits[tile.dataset.url] || 0;
+        if (c > max) max = c;
     });
-
     tiles.forEach(tile => {
-        const url = tile.dataset.url;
-        const count = visits[url] || 0;
+        const count = visits[tile.dataset.url] || 0;
         const intensity = count / max;
-        const countEl = document.getElementById('count-' + tile.dataset.url.replace(/[^a-z0-9]/gi, '-').toLowerCase());
-        if (countEl) countEl.textContent = count;
-
-        // heat colour: low = #e8f4fd, high = #0070f3
-        const r = Math.round(232 - (232 - 0) * intensity);
-        const g = Math.round(244 - (244 - 112) * intensity);
-        const b = Math.round(253 - (253 - 243) * intensity);
+        const countEl = tile.querySelector('.hm-count');
+        if (countEl) countEl.textContent = count > 0 ? count : '';
+        const r = Math.round(232 - 232 * intensity);
+        const g = Math.round(244 - 132 * intensity);
+        const b = Math.round(253 - 10 * intensity);
         tile.style.background = count > 0 ? `rgb(${r},${g},${b})` : '#f4f4f5';
         tile.style.color = intensity > 0.5 ? '#fff' : '#333';
         tile.style.borderColor = count > 0 ? `rgba(0,112,243,${0.2 + intensity * 0.6})` : '#e5e5e5';
     });
 }
 
-renderHeatmap();
+if (document.querySelector('.hm-tile')) renderHeatmap();
 
-// ── TECH FACTS ROTATOR ──
+// ── TECH SPOTLIGHT — 5 per day, 30s rotation, prev/next ──
 const facts = [
     { fact: "The global cloud computing market is projected to reach <strong>$1.2 trillion</strong> by 2028.", src: "Gartner", link: "https://www.gartner.com/en/newsroom/press-releases/2023-11-29-gartner-says-cloud-will-become-a-business-necessity-by-2028" },
     { fact: "By 2025, <strong>85% of enterprises</strong> will have a cloud-first principle.", src: "Gartner", link: "https://www.gartner.com/smarterwithgartner/cloud-first-strategy" },
@@ -108,33 +84,87 @@ const facts = [
     { fact: "Kubernetes powers over <strong>5.6 million developers</strong> worldwide as of 2023.", src: "CNCF Survey", link: "https://www.cncf.io/reports/cncf-annual-survey-2023/" },
     { fact: "AWS holds approximately <strong>31% of the global cloud market</strong> share as of 2024.", src: "Statista", link: "https://www.statista.com/chart/18819/worldwide-market-share-of-leading-cloud-infrastructure-service-providers/" },
     { fact: "The average cost of a data breach in 2024 is <strong>$4.88 million</strong> — an all-time high.", src: "IBM Security", link: "https://www.ibm.com/reports/data-breach" },
-    { fact: "Transformer architecture, the foundation of all modern LLMs, was introduced in <strong>2017</strong> in the paper 'Attention Is All You Need'.", src: "Google Brain", link: "https://arxiv.org/abs/1706.03762" },
+    { fact: "Transformer architecture, the foundation of all modern LLMs, was introduced in <strong>2017</strong> in 'Attention Is All You Need'.", src: "Google Brain", link: "https://arxiv.org/abs/1706.03762" },
     { fact: "There are over <strong>10,000 Kubernetes clusters</strong> running in production globally across Fortune 500 companies.", src: "CNCF", link: "https://www.cncf.io/reports/cncf-annual-survey-2023/" },
     { fact: "MLOps market size is expected to grow from <strong>$1.1B in 2023 to $13B by 2030</strong>.", src: "MarketsandMarkets", link: "https://www.marketsandmarkets.com/Market-Reports/mlops-market-170761090.html" },
     { fact: "The first cloud service, <strong>Amazon S3</strong>, launched on March 14, 2006 — changing infrastructure forever.", src: "AWS History", link: "https://aws.amazon.com/blogs/aws/amazon_s3/" },
     { fact: "Serverless computing can reduce infrastructure costs by up to <strong>70%</strong> for event-driven workloads.", src: "AWS Whitepaper", link: "https://docs.aws.amazon.com/whitepapers/latest/serverless-multi-tier-architectures-api-gateway-lambda/introduction.html" },
-    { fact: "The term <strong>'DevOps'</strong> was coined by Patrick Debois in 2009 at the first DevOpsDays conference in Ghent, Belgium.", src: "DevOpsDays", link: "https://devopsdays.org/about/" },
-    { fact: "Vector databases are the backbone of RAG systems — <strong>Pinecone, Weaviate, and pgvector</strong> are the top 3 used in production.", src: "DB-Engines", link: "https://db-engines.com/en/ranking/vector+dbms" },
+    { fact: "The term <strong>'DevOps'</strong> was coined by Patrick Debois in 2009 at the first DevOpsDays in Ghent, Belgium.", src: "DevOpsDays", link: "https://devopsdays.org/about/" },
+    { fact: "Vector databases are the backbone of RAG systems — <strong>Pinecone, Weaviate, and pgvector</strong> are the top 3 in production.", src: "DB-Engines", link: "https://db-engines.com/en/ranking/vector+dbms" },
     { fact: "Platform Engineering adoption grew by <strong>60%</strong> in 2023 as teams sought to reduce cognitive load on developers.", src: "Gartner", link: "https://www.gartner.com/en/articles/what-is-platform-engineering" },
     { fact: "The SRE discipline was pioneered at <strong>Google in 2003</strong> by Ben Treynor Sloss to apply software engineering to operations.", src: "Google SRE Book", link: "https://sre.google/sre-book/introduction/" },
 ];
 
-let currentFact = 0;
+const SPOTLIGHT_KEY  = 'ctai_spotlight';
+const MAX_PER_DAY    = 5;
+const ROTATE_MS      = 30000; // 30 seconds
 
-function renderFact() {
-    const f = facts[currentFact];
-    document.getElementById('techFact').innerHTML = `
-        <p class="fact-text">${f.fact}</p>
-        <a class="fact-source" href="${f.link}" target="_blank">Source: ${f.src} ↗</a>
-    `;
+function getTodayKey() {
+    return new Date().toISOString().slice(0, 10); // "2026-04-01"
+}
+
+function getSpotlightState() {
+    try {
+        const s = JSON.parse(localStorage.getItem(SPOTLIGHT_KEY));
+        if (s && s.date === getTodayKey()) return s;
+    } catch(e) {}
+    // fresh day — pick 5 random unique indices
+    const shuffled = [...Array(facts.length).keys()].sort(() => Math.random() - 0.5);
+    const state = { date: getTodayKey(), indices: shuffled.slice(0, MAX_PER_DAY), current: 0 };
+    localStorage.setItem(SPOTLIGHT_KEY, JSON.stringify(state));
+    return state;
+}
+
+function saveState(state) {
+    localStorage.setItem(SPOTLIGHT_KEY, JSON.stringify(state));
+}
+
+let spotlightState = getSpotlightState();
+let autoTimer = null;
+
+function renderSpotlight() {
+    const s = spotlightState;
+    const factIdx = s.indices[s.current];
+    const f = facts[factIdx];
+    const pos = s.current + 1;
+
+    document.getElementById('techFact').innerHTML =
+        `<p class="fact-text">${f.fact}</p>
+         <a class="fact-source" href="${f.link}" target="_blank">Source: ${f.src} ↗</a>`;
+
+    document.getElementById('spotlightProgress').textContent =
+        `Spotlight ${pos} of ${MAX_PER_DAY} today`;
+
+    // show time until next auto-advance
+    const prevBtn = document.querySelector('.fact-nav-btn');
+    if (prevBtn) prevBtn.disabled = s.current === 0;
 }
 
 function nextFact() {
-    currentFact = (currentFact + 1) % facts.length;
-    renderFact();
+    if (spotlightState.current < MAX_PER_DAY - 1) {
+        spotlightState.current++;
+    } else {
+        spotlightState.current = 0; // wrap back to first of today's 5
+    }
+    saveState(spotlightState);
+    renderSpotlight();
+    resetTimer();
 }
 
-// auto-rotate every 12 seconds
-renderFact();
-setInterval(nextFact, 12000);
+function prevFact() {
+    if (spotlightState.current > 0) {
+        spotlightState.current--;
+        saveState(spotlightState);
+        renderSpotlight();
+        resetTimer();
+    }
+}
+
+function resetTimer() {
+    if (autoTimer) clearInterval(autoTimer);
+    autoTimer = setInterval(nextFact, ROTATE_MS);
+}
+
+renderSpotlight();
+resetTimer();
 </script>

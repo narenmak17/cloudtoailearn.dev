@@ -486,17 +486,33 @@
             font-weight: 600;
         }
         .fact-source:hover { text-decoration: underline; }
-        .fact-next-btn {
+        .spotlight-counter {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.68rem;
+            color: #aaa;
+            margin-bottom: 0.4rem;
+        }
+        .spotlight-nav {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 0.5rem;
+        }
+        .fact-nav-btn {
             background: none;
-            border: none;
+            border: 1px solid #e5e5e5;
+            border-radius: 5px;
             font-size: 0.72rem;
             color: #0070f3;
             cursor: pointer;
             font-family: inherit;
             font-weight: 600;
-            padding: 0;
+            padding: 3px 8px;
+            transition: background 0.15s;
         }
-        .fact-next-btn:hover { text-decoration: underline; }
+        .fact-nav-btn:hover { background: #eef2ff; }
+        .fact-nav-btn:disabled { color: #ccc; border-color: #f0f0f0; cursor: default; background: none; }
 
         /* AUTH LINKS */
         .auth-links { list-style: none; }
