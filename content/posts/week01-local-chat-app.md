@@ -12,7 +12,7 @@ cover: "/images/posts/ai-series/week01-cover.png"
 ---
 
 > Week 1 of my AI Demo Series · [cloudtoailearn.dev](https://cloudtoailearn.dev/)
-> 🔗 **Live demo:** [Hugging Face Spaces](#) · 🔗 **GitHub repo:** [Add repo link]
+> 🔗 **GitHub repo:** https://github.com/narenmak17/week01-simple-chat
 
 Every AI tutorial starts with "call the OpenAI API". That's fine until you're paying per token just to experiment with prompt design.
 

@@ -1,12 +1,11 @@
 ---
-title: "From Cloud to Cognition: Architecting AI-Ready Infrastructure"
+title: "From Failure to Resiliency: Building Resilient Systems - Embracing Failure Part-1"
 date: 2026-04-01
-draft: false
+draft: true
 author: "Naren"
-description: "How cloud architects must evolve their thinking to support AI workloads at scale — and what that means for the infrastructure you build today."
-tags: ["cloud-architecture", "ai-infrastructure", "mlops", "aws", "kubernetes"]
-categories: ["cloud"]
-cover: "/images/posts/cloud-to-ai-cover.png"
+description: "Placeholder — real content coming soon in resiliency-series--long-part1.md"
+tags: ["resiliency"]
+categories: ["resiliency"]
 ---
 
 After 15 years of building cloud infrastructure, I've watched the industry shift from bare metal to VMs, VMs to containers, and containers to serverless. Each wave changed how we think about architecture.
