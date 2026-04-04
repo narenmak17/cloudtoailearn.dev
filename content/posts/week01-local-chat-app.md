@@ -1,6 +1,6 @@
 ---
 title: "I Built a Local AI Chat App — Here's the Architecture (Week 1)"
-date: 2026-04-08
+date: 2026-04-04
 draft: false
 author: "Naren"
 description: "Zero API costs, runs on CPU, honest account of what broke and why — Week 1 of my hands-on AI demo series."

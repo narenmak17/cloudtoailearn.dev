@@ -31,8 +31,13 @@ title = 'CloudToAILearn'
   category = "categories"
 
 [params.categories]
-  cloud = "☁️ Cloud"
-  ai = "🤖 AI"
+  cloud = "☁️ Cloud Architecture"
+  ai = "🤖 AI & LLM"
   resiliency = "🛡️ Resiliency"
   cost-optimization = "💰 Cost Optimization"
-  patterns = "🧩 Patterns"
+  patterns = "🧩 Architecture Patterns"
+  app-architecture = "🏗️ App Architecture"
+  deployment = "🚀 Deployment"
+  databases = "🗄️ Databases"
+  devops = "⚙️ DevOps & SRE"
+  security = "🔐 Security"
