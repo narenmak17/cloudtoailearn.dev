@@ -6,7 +6,7 @@ draft: false
 
 ## Hi, I'm Naren
 
-I'm a Cloud Architect with 15+ years of experience in software engineering, currently focused on building AI-ready cloud infrastructure and helping engineering teams scale with confidence.
+I'm a Thoughtful Leader & Cloud & Platform Architect with 15+ years of experience in software engineering, currently focused on building AI-ready cloud infrastructure and helping engineering teams scale with confidence.
 
 This site is where I share:
 
