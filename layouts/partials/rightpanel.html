@@ -1,0 +1,140 @@
+<!-- ── RIGHT PANEL ── -->
+
+<!-- HEATMAP: TOP 20 POSTS -->
+<div class="rp-section">
+    <div class="rp-title">🔥 Most Visited</div>
+    <div class="rp-subtitle">Click any tile to open post</div>
+    <div class="heatmap-grid" id="heatmapGrid">
+        {{ $posts := where .Site.RegularPages "Section" "posts" }}
+        {{ range first 20 $posts }}
+        {{ $short := .Params.shortname | default (.Title | truncate 18) }}
+        <a class="hm-tile"
+           href="{{ .Permalink }}"
+           data-url="{{ .Permalink }}"
+           data-title="{{ .Title }}"
+           title="{{ .Title }}"
+           onclick="trackVisit('{{ .Permalink }}')">
+            <span class="hm-label">{{ $short }}</span>
+            <span class="hm-count" id="count-{{ .Permalink | urlize }}">0</span>
+        </a>
+        {{ end }}
+    </div>
+    <div style="font-size:0.7rem;color:#bbb;margin-top:0.6rem;text-align:center;">Darker = more visits · tracked locally</div>
+</div>
+
+<hr class="rp-divider">
+
+<!-- TECH FACTS & AUTHORITATIVE LINKS -->
+<div class="rp-section">
+    <div class="rp-title">💡 Tech Spotlight</div>
+    <div class="tech-fact-card" id="techFact">
+        <!-- rotated by JS -->
+    </div>
+    <div style="text-align:right;margin-top:0.4rem;">
+        <button class="fact-next-btn" onclick="nextFact()">Next fact →</button>
+    </div>
+</div>
+
+<hr class="rp-divider">
+
+<!-- AUTHORITATIVE LINKS -->
+<div class="rp-section">
+    <div class="rp-title">📚 Learn More</div>
+    <ul class="auth-links">
+        <li><a href="https://en.wikipedia.org/wiki/Cloud_computing" target="_blank">☁️ Cloud Computing — Wikipedia</a></li>
+        <li><a href="https://en.wikipedia.org/wiki/Artificial_intelligence" target="_blank">🤖 Artificial Intelligence — Wikipedia</a></li>
+        <li><a href="https://en.wikipedia.org/wiki/Large_language_model" target="_blank">🧠 Large Language Models — Wikipedia</a></li>
+        <li><a href="https://en.wikipedia.org/wiki/Kubernetes" target="_blank">⚙️ Kubernetes — Wikipedia</a></li>
+        <li><a href="https://en.wikipedia.org/wiki/DevOps" target="_blank">🔄 DevOps — Wikipedia</a></li>
+        <li><a href="https://aws.amazon.com/what-is-cloud-computing/" target="_blank">☁️ What is Cloud? — AWS</a></li>
+        <li><a href="https://cloud.google.com/learn/what-is-artificial-intelligence" target="_blank">🤖 What is AI? — Google</a></li>
+        <li><a href="https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary/what-is-mlops" target="_blank">🔬 What is MLOps? — Azure</a></li>
+        <li><a href="https://www.cncf.io/projects/" target="_blank">🌐 CNCF Projects — cncf.io</a></li>
+        <li><a href="https://roadmap.sh/ai-engineer" target="_blank">🗺️ AI Engineer Roadmap</a></li>
+    </ul>
+</div>
+
+<script>
+// ── HEATMAP VISIT TRACKING ──
+const STORAGE_KEY = 'ctai_visits';
+
+function getVisits() {
+    try { return JSON.parse(localStorage.getItem(STORAGE_KEY)) || {}; }
+    catch(e) { return {}; }
+}
+
+function trackVisit(url) {
+    const visits = getVisits();
+    visits[url] = (visits[url] || 0) + 1;
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(visits));
+}
+
+function renderHeatmap() {
+    const visits = getVisits();
+    const tiles = document.querySelectorAll('.hm-tile');
+    if (!tiles.length) return;
+
+    // find max for relative intensity
+    let max = 1;
+    tiles.forEach(tile => {
+        const url = tile.dataset.url;
+        if (visits[url] && visits[url] > max) max = visits[url];
+    });
+
+    tiles.forEach(tile => {
+        const url = tile.dataset.url;
+        const count = visits[url] || 0;
+        const intensity = count / max;
+        const countEl = document.getElementById('count-' + tile.dataset.url.replace(/[^a-z0-9]/gi, '-').toLowerCase());
+        if (countEl) countEl.textContent = count;
+
+        // heat colour: low = #e8f4fd, high = #0070f3
+        const r = Math.round(232 - (232 - 0) * intensity);
+        const g = Math.round(244 - (244 - 112) * intensity);
+        const b = Math.round(253 - (253 - 243) * intensity);
+        tile.style.background = count > 0 ? `rgb(${r},${g},${b})` : '#f4f4f5';
+        tile.style.color = intensity > 0.5 ? '#fff' : '#333';
+        tile.style.borderColor = count > 0 ? `rgba(0,112,243,${0.2 + intensity * 0.6})` : '#e5e5e5';
+    });
+}
+
+renderHeatmap();
+
+// ── TECH FACTS ROTATOR ──
+const facts = [
+    { fact: "The global cloud computing market is projected to reach <strong>$1.2 trillion</strong> by 2028.", src: "Gartner", link: "https://www.gartner.com/en/newsroom/press-releases/2023-11-29-gartner-says-cloud-will-become-a-business-necessity-by-2028" },
+    { fact: "By 2025, <strong>85% of enterprises</strong> will have a cloud-first principle.", src: "Gartner", link: "https://www.gartner.com/smarterwithgartner/cloud-first-strategy" },
+    { fact: "GPT-4 was trained on approximately <strong>1 trillion parameters</strong> and over 45TB of text data.", src: "OpenAI", link: "https://openai.com/research/gpt-4" },
+    { fact: "Kubernetes powers over <strong>5.6 million developers</strong> worldwide as of 2023.", src: "CNCF Survey", link: "https://www.cncf.io/reports/cncf-annual-survey-2023/" },
+    { fact: "AWS holds approximately <strong>31% of the global cloud market</strong> share as of 2024.", src: "Statista", link: "https://www.statista.com/chart/18819/worldwide-market-share-of-leading-cloud-infrastructure-service-providers/" },
+    { fact: "The average cost of a data breach in 2024 is <strong>$4.88 million</strong> — an all-time high.", src: "IBM Security", link: "https://www.ibm.com/reports/data-breach" },
+    { fact: "Transformer architecture, the foundation of all modern LLMs, was introduced in <strong>2017</strong> in the paper 'Attention Is All You Need'.", src: "Google Brain", link: "https://arxiv.org/abs/1706.03762" },
+    { fact: "There are over <strong>10,000 Kubernetes clusters</strong> running in production globally across Fortune 500 companies.", src: "CNCF", link: "https://www.cncf.io/reports/cncf-annual-survey-2023/" },
+    { fact: "MLOps market size is expected to grow from <strong>$1.1B in 2023 to $13B by 2030</strong>.", src: "MarketsandMarkets", link: "https://www.marketsandmarkets.com/Market-Reports/mlops-market-170761090.html" },
+    { fact: "The first cloud service, <strong>Amazon S3</strong>, launched on March 14, 2006 — changing infrastructure forever.", src: "AWS History", link: "https://aws.amazon.com/blogs/aws/amazon_s3/" },
+    { fact: "Serverless computing can reduce infrastructure costs by up to <strong>70%</strong> for event-driven workloads.", src: "AWS Whitepaper", link: "https://docs.aws.amazon.com/whitepapers/latest/serverless-multi-tier-architectures-api-gateway-lambda/introduction.html" },
+    { fact: "The term <strong>'DevOps'</strong> was coined by Patrick Debois in 2009 at the first DevOpsDays conference in Ghent, Belgium.", src: "DevOpsDays", link: "https://devopsdays.org/about/" },
+    { fact: "Vector databases are the backbone of RAG systems — <strong>Pinecone, Weaviate, and pgvector</strong> are the top 3 used in production.", src: "DB-Engines", link: "https://db-engines.com/en/ranking/vector+dbms" },
+    { fact: "Platform Engineering adoption grew by <strong>60%</strong> in 2023 as teams sought to reduce cognitive load on developers.", src: "Gartner", link: "https://www.gartner.com/en/articles/what-is-platform-engineering" },
+    { fact: "The SRE discipline was pioneered at <strong>Google in 2003</strong> by Ben Treynor Sloss to apply software engineering to operations.", src: "Google SRE Book", link: "https://sre.google/sre-book/introduction/" },
+];
+
+let currentFact = 0;
+
+function renderFact() {
+    const f = facts[currentFact];
+    document.getElementById('techFact').innerHTML = `
+        <p class="fact-text">${f.fact}</p>
+        <a class="fact-source" href="${f.link}" target="_blank">Source: ${f.src} ↗</a>
+    `;
+}
+
+function nextFact() {
+    currentFact = (currentFact + 1) % facts.length;
+    renderFact();
+}
+
+// auto-rotate every 12 seconds
+renderFact();
+setInterval(nextFact, 12000);
+</script>

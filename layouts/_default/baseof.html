@@ -104,12 +104,12 @@
 
         /* ── PAGE WRAPPER ── */
         .page-wrap {
-            max-width: 1200px;
+            max-width: 1340px;
             margin: 0 auto;
             padding: 2rem 1.5rem;
             display: grid;
-            grid-template-columns: 260px 1fr;
-            gap: 2rem;
+            grid-template-columns: 240px 1fr 220px;
+            gap: 1.8rem;
             align-items: start;
         }
 
@@ -393,7 +393,131 @@
         }
         footer a { color: #0070f3; text-decoration: none; }
 
+        /* ── RIGHT PANEL ── */
+        .right-panel {
+            position: sticky;
+            top: 114px;
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+            max-height: calc(100vh - 130px);
+            overflow-y: auto;
+        }
+        .right-panel::-webkit-scrollbar { width: 3px; }
+        .right-panel::-webkit-scrollbar-thumb { background: #ddd; border-radius: 4px; }
+        .rp-section {
+            background: #fff;
+            border: 1px solid #ececec;
+            border-radius: 10px;
+            padding: 1rem;
+            margin-bottom: 1rem;
+        }
+        .rp-title {
+            font-size: 0.72rem;
+            font-weight: 700;
+            color: #aaa;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            margin-bottom: 0.3rem;
+        }
+        .rp-subtitle {
+            font-size: 0.68rem;
+            color: #bbb;
+            margin-bottom: 0.7rem;
+        }
+        .rp-divider { display: none; }
+
+        /* HEATMAP */
+        .heatmap-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 4px;
+        }
+        .hm-tile {
+            background: #f4f4f5;
+            border: 1px solid #e5e5e5;
+            border-radius: 5px;
+            padding: 5px 3px;
+            text-align: center;
+            text-decoration: none;
+            cursor: pointer;
+            transition: transform 0.15s, box-shadow 0.15s;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 2px;
+            min-height: 44px;
+            justify-content: center;
+        }
+        .hm-tile:hover { transform: scale(1.08); box-shadow: 0 2px 8px rgba(0,112,243,0.18); z-index: 1; }
+        .hm-label {
+            font-size: 0.58rem;
+            font-weight: 600;
+            line-height: 1.2;
+            word-break: break-word;
+            color: inherit;
+        }
+        .hm-count {
+            font-size: 0.6rem;
+            font-weight: 700;
+            opacity: 0.7;
+            color: inherit;
+        }
+
+        /* TECH FACTS */
+        .tech-fact-card {
+            background: #f7f9ff;
+            border-left: 3px solid #0070f3;
+            border-radius: 0 6px 6px 0;
+            padding: 0.7rem 0.8rem;
+            margin: 0.5rem 0;
+            min-height: 70px;
+        }
+        .fact-text {
+            font-size: 0.78rem;
+            color: #333;
+            line-height: 1.5;
+            margin-bottom: 0.4rem !important;
+        }
+        .fact-source {
+            font-size: 0.68rem;
+            color: #0070f3;
+            text-decoration: none;
+            font-weight: 600;
+        }
+        .fact-source:hover { text-decoration: underline; }
+        .fact-next-btn {
+            background: none;
+            border: none;
+            font-size: 0.72rem;
+            color: #0070f3;
+            cursor: pointer;
+            font-family: inherit;
+            font-weight: 600;
+            padding: 0;
+        }
+        .fact-next-btn:hover { text-decoration: underline; }
+
+        /* AUTH LINKS */
+        .auth-links { list-style: none; }
+        .auth-links li { margin-bottom: 0.4rem; }
+        .auth-links a {
+            font-size: 0.75rem;
+            color: #444;
+            text-decoration: none;
+            display: block;
+            padding: 3px 0;
+            border-bottom: 1px solid #f4f4f5;
+            transition: color 0.15s;
+            line-height: 1.4;
+        }
+        .auth-links a:hover { color: #0070f3; }
+
         /* RESPONSIVE */
+        @media (max-width: 1024px) {
+            .page-wrap { grid-template-columns: 240px 1fr; }
+            .right-panel { display: none; }
+        }
         @media (max-width: 768px) {
             .page-wrap { grid-template-columns: 1fr; }
             .sidebar { position: static; max-height: none; }
@@ -441,6 +565,11 @@
     <main class="main-content">
         {{ block "main" . }}{{ end }}
     </main>
+
+    <!-- RIGHT PANEL -->
+    <aside class="right-panel">
+        {{ partial "rightpanel.html" . }}
+    </aside>
 
 </div>
 

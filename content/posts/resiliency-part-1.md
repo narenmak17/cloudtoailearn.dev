@@ -6,7 +6,6 @@ author: "Naren"
 description: "How cloud architects must evolve their thinking to support AI workloads at scale — and what that means for the infrastructure you build today."
 tags: ["cloud-architecture", "ai-infrastructure", "mlops", "aws", "kubernetes"]
 categories: ["cloud"]
-shortname: "Cloud→AI Infra"
 cover: "/images/posts/cloud-to-ai-cover.png"
 ---
 
