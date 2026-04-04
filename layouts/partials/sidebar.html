@@ -11,38 +11,27 @@
 <div class="sb-title">Archive</div>
 
 {{ $posts := where .Site.RegularPages "Section" "posts" }}
-{{ $byMonth := dict }}
 
-{{ range $posts }}
-    {{ $monthKey := .Date.Format "January 2006" }}
-    {{ $existing := index $byMonth $monthKey }}
-    {{ if $existing }}
-        {{ $byMonth = merge $byMonth (dict $monthKey (append $existing .)) }}
-    {{ else }}
-        {{ $byMonth = merge $byMonth (dict $monthKey (slice .)) }}
+{{ if $posts }}
+    {{ range ($posts.GroupByDate "January 2006") }}
+    <div class="month-group">
+        <button class="month-toggle">
+            <span>{{ .Key }}</span>
+            <span class="badge">{{ len .Pages }}</span>
+            <span class="arrow">▶</span>
+        </button>
+        <ul class="month-posts">
+            {{ range .Pages }}
+            <li>
+                <a href="{{ .Permalink }}" title="{{ .Title }}">
+                    {{ .Title | truncate 40 }}
+                </a>
+            </li>
+            {{ end }}
+        </ul>
+    </div>
     {{ end }}
-{{ end }}
-
-{{ range $month, $monthPosts := $byMonth }}
-<div class="month-group">
-    <button class="month-toggle">
-        <span>{{ $month }}</span>
-        <span class="badge">{{ len $monthPosts }}</span>
-        <span class="arrow">▶</span>
-    </button>
-    <ul class="month-posts">
-        {{ range $monthPosts }}
-        <li>
-            <a href="{{ .Permalink }}" title="{{ .Title }}">
-                {{ .Title | truncate 40 }}
-            </a>
-        </li>
-        {{ end }}
-    </ul>
-</div>
-{{ end }}
-
-{{ if not $posts }}
+{{ else }}
 <p style="font-size:0.8rem; color:#aaa; padding: 0.5rem 0;">No posts yet.</p>
 {{ end }}
 
