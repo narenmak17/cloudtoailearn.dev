@@ -1,11 +1,13 @@
-# Hugo build output
+# Hugo build output - NEVER commit
 public/
+resources/
 
-# Theme folder - layouts moved to project level, theme not needed
+# Theme folder - layouts are at project level
 themes/
 
-# Hugo lock file
+# Hugo lock and build files
 .hugo_build.lock
+hugo_stats.json
 
 # OS files
 .DS_Store
@@ -15,5 +17,6 @@ Thumbs.db
 .vscode/
 .idea/
 
-# Fix script
+# Scripts
 fix_theme.bat
+Newpost_guide.txt
