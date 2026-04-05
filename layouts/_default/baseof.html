@@ -5,6 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ block "title" . }}{{ .Site.Title }}{{ end }}</title>
     <meta name="description" content="{{ .Site.Params.description }}">
+    <!-- Open Graph -->
+    {{ if .IsHome }}
+    <meta property="og:title" content="{{ .Site.Title }}" />
+    <meta property="og:description" content="{{ .Site.Params.description }}" />
+    <meta property="og:image" content="/images/default.jpg" />
+    {{ else }}
+    <meta property="og:title" content="{{ .Title }}" />
+    <meta property="og:description" content="{{ .Description | default .Summary }}" />
+    <meta property="og:image" content="{{ .Params.cover | default "/images/default.jpg" }}" />
+    {{ end }}
+    <meta property="og:url" content="{{ .Permalink }}" />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary_large_image" />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -302,6 +315,196 @@
         .sb-tag:hover { background: #eef2ff; color: #3b5bdb; }
 
         .sb-divider { border: none; border-top: 1px solid #f0f0f0; margin: 1rem 0; }
+
+        /* Author section */
+        .author-section {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            margin-bottom: 1rem;
+        }
+        .author-photo {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+        .author-info strong {
+            display: block;
+            font-size: 0.9rem;
+            color: #1a1a1a;
+        }
+        .author-info p {
+            font-size: 0.8rem;
+            color: #666;
+            margin: 0.1rem 0 0 0;
+        }
+
+        /* Newsletter */
+        .newsletter {
+            margin-top: 1rem;
+        }
+        .newsletter p {
+            font-size: 0.8rem;
+            color: #666;
+            margin-bottom: 0.5rem;
+        }
+        .newsletter-input {
+            width: 100%;
+            border: 1px solid #e0e0e0;
+            border-radius: 6px;
+            padding: 6px 8px;
+            font-size: 0.8rem;
+            margin-bottom: 0.5rem;
+            outline: none;
+        }
+        .newsletter-input:focus {
+            border-color: #0070f3;
+        }
+        .newsletter-btn {
+            width: 100%;
+            background: #0070f3;
+            color: #fff;
+            border: none;
+            border-radius: 6px;
+            padding: 6px 8px;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .newsletter-btn:hover {
+            background: #0056cc;
+        }
+
+        /* Social share */
+        .social-share {
+            margin: 2rem 0;
+            padding: 1rem 0;
+            border-top: 1px solid #f0f0f0;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        .social-share p {
+            font-size: 0.9rem;
+            color: #666;
+            margin-bottom: 0.5rem;
+        }
+        .share-btn {
+            display: inline-block;
+            margin-right: 1rem;
+            padding: 0.5rem 1rem;
+            background: #0070f3;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 6px;
+            font-size: 0.8rem;
+            transition: background 0.2s;
+        }
+        .share-btn:hover {
+            background: #0056cc;
+        }
+        .share-btn.twitter:hover {
+            background: #1da1f2;
+        }
+        .share-btn.linkedin:hover {
+            background: #0077b5;
+        }
+
+        /* Affiliates */
+        .affiliates {
+            margin-top: 1rem;
+        }
+        .affiliate-link {
+            display: block;
+            color: #0070f3;
+            text-decoration: none;
+            font-size: 0.8rem;
+            margin-bottom: 0.5rem;
+            padding: 0.3rem 0;
+            border-radius: 4px;
+            transition: background 0.2s;
+        }
+        .affiliate-link:hover {
+            background: #f0f4ff;
+            text-decoration: underline;
+        }
+        .affiliate-link span {
+            float: right;
+            color: #aaa;
+        }
+
+        /* Related posts */
+        .related-posts {
+            margin: 2rem 0;
+            padding: 1rem 0;
+            border-top: 1px solid #f0f0f0;
+        }
+        .related-posts h3 {
+            font-size: 1.1rem;
+            color: #1a1a1a;
+            margin-bottom: 0.5rem;
+        }
+        .related-posts ul {
+            list-style: none;
+            padding: 0;
+        }
+        .related-posts li {
+            margin-bottom: 0.3rem;
+        }
+        .related-posts a {
+            color: #0070f3;
+            text-decoration: none;
+            font-size: 0.9rem;
+        }
+        .related-posts a:hover {
+            text-decoration: underline;
+        }
+
+        /* Ad placeholder */
+        .ad-placeholder {
+            background: #f8f9fa;
+            border: 1px solid #e0e0e0;
+            padding: 1rem;
+            text-align: center;
+            margin: 1rem 0;
+            border-radius: 6px;
+            font-size: 0.8rem;
+            color: #666;
+        }
+
+        /* Donate button */
+        .donate-btn {
+            display: inline-block;
+            background: #ffdd00;
+            color: #000;
+            padding: 0.5rem 1rem;
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: 600;
+            transition: background 0.2s;
+        }
+        .donate-btn:hover {
+            background: #ffcc00;
+        }
+
+        /* Back to top */
+        #back-to-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            display: none;
+            background: #0070f3;
+            color: white;
+            border: none;
+            padding: 10px 12px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.2rem;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            transition: background 0.2s;
+        }
+        #back-to-top:hover {
+            background: #0056cc;
+        }
 
         /* ── MAIN CONTENT ── */
         .main-content { min-width: 0; }
@@ -767,6 +970,23 @@ if (navSearch) {
         });
     });
 }
+</script>
+
+<button id="back-to-top" title="Back to top">↑</button>
+
+<script>
+// Back to top button
+window.addEventListener('scroll', function() {
+    var btn = document.getElementById('back-to-top');
+    if (window.pageYOffset > 300) {
+        btn.style.display = 'block';
+    } else {
+        btn.style.display = 'none';
+    }
+});
+document.getElementById('back-to-top').addEventListener('click', function() {
+    window.scrollTo({top: 0, behavior: 'smooth'});
+});
 </script>
 
 </body>

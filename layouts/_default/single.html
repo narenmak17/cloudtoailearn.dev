@@ -29,10 +29,52 @@
     <img class="post-cover" src="{{ . }}" alt="{{ $.Title }}">
     {{ end }}
 
+    <!-- AD PLACEHOLDER -->
+    <div class="ad-placeholder">
+        <!-- Google AdSense code here -->
+        <p>Advertisement</p>
+    </div>
+
     <!-- POST BODY -->
     <div class="post-content">
         {{ .Content }}
     </div>
+
+    <!-- SOCIAL SHARING -->
+    <div class="social-share">
+        <p>Share this post:</p>
+        <a href="https://twitter.com/intent/tweet?text={{ .Title | urlquery }}&url={{ .Permalink | urlquery }}" target="_blank" class="share-btn twitter">Twitter</a>
+        <a href="https://www.linkedin.com/sharing/share-offsite/?url={{ .Permalink | urlquery }}" target="_blank" class="share-btn linkedin">LinkedIn</a>
+    </div>
+
+    <!-- COMMENTS -->
+    <div id="disqus_thread"></div>
+    <script>
+        var disqus_config = function () {
+            this.page.url = '{{ .Permalink }}';
+            this.page.identifier = '{{ .Permalink }}';
+        };
+        (function() {
+            var d = document, s = d.createElement('script');
+            s.src = 'https://cloudtoailearn.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', +new Date());
+            (d.head || d.body).appendChild(s);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+    <!-- RELATED POSTS -->
+    {{ $related := .Site.RegularPages.Related . | first 3 }}
+    {{ with $related }}
+    <div class="related-posts">
+        <h3>Related Posts</h3>
+        <ul>
+            {{ range . }}
+            <li><a href="{{ .RelPermalink }}">{{ .Title }}</a></li>
+            {{ end }}
+        </ul>
+    </div>
+    {{ end }}
 
     <!-- BACK LINK -->
     <div style="margin-top:2.5rem; padding-top:1.2rem; border-top:1px solid #f0f0f0;">
