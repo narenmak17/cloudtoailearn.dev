@@ -39,14 +39,15 @@ below the high level of each of those pattern and thier usage.
 ![failure to Resiliency Metrics](/images/posts/resiliency/part3/resiliency-part3-image3.png)
 *Figure 1: Resiliency Matrix
 
+> **once we finish high level 4 parts of the series! we will be having separate blogs on each resiliency patterns**
 ## Key Takeaways
-**Circuit breakers stop cascades** — one failing service shouldn't take down everything else
-**Bulkheads isolate resources** — separate pools mean one slow service can't starve others
-**Timeouts fail fast** — aggressive timeouts feel uncomfortable but prevent catastrophic pile-ups
-**Retries need jitter** — exponential backoff without jitter creates thundering herds
-**Fallbacks beat hard failures** — 90% functionality is infinitely better than 0%
-**Chaos engineering validates everything** — patterns you haven't tested are patterns you don't trust
-**Start small, iterate** — implement in phases, measure impact, improve continuously
+#### **Circuit breakers stop cascades** — one failing service shouldn't take down everything else
+#### **Bulkheads isolate resources** — separate pools mean one slow service can't starve others
+#### **Timeouts fail fast** — aggressive timeouts feel uncomfortable but prevent catastrophic pile-ups
+#### **Retries need jitter** — exponential backoff without jitter creates thundering herds
+#### **Fallbacks beat hard failures** — 90% functionality is infinitely better than 0%
+#### **Chaos engineering validates everything** — patterns you haven't tested are patterns you don't trust
+#### **Start small, iterate** — implement in phases, measure impact, improve continuously
 
 
 ## What's Next: The Ultimate Isolation Pattern
@@ -75,14 +76,14 @@ When cells are the right answer — and when they're overkill
 
 
 ### Read the full series:
-### Part 1: Everything Fails, All the Time — Why embracing failure is your competitive advantage
-### Part 2: What Actually Fails in Production? — A data-driven look at the 70/30 rule
-### Part 3: Building Antifragile Systems ← You are here
-### Part 4: Cell-Based Architecture — Coming next week
+#### Part 1: Everything Fails, All the Time — Why embracing failure is your competitive advantage
+#### Part 2: What Actually Fails in Production? — A data-driven look at the 70/30 rule
+#### Part 3: Building Antifragile Systems ← You are here
+#### Part 4: Cell-Based Architecture — Coming next week
 
 ## References and Further Reading
 ### Resilience Patterns
-#### Martin Fowler: Circuit Breaker — The definitive explanation of the pattern
+#### [Martin Fowler: Circuit Breaker] (https://martinfowler.com/bliki/CircuitBreaker.html) — The definitive explanation of the pattern
 #### Microsoft Cloud Design Patterns: Bulkhead — Detailed bulkhead implementation guide
 #### AWS Builders' Library: Avoiding Fallback — Static stability and isolation
 #### AWS Builders' Library: Avoiding Overload — Load shedding strategies
