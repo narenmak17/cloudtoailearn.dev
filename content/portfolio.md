@@ -8,8 +8,7 @@ draft: false
 
 Here are some highlights from my work in cloud architecture, AI systems, and platform engineering.
 
-### Real-Time Data Streaming Platform
-**Client:** Santander Bank  
+### Real-Time Data Streaming Platform 
 **Tech:** Scala, Kafka, AWS (MSK, Kinesis, EKS)  
 **Impact:** Designed and implemented a high-throughput data pipeline processing millions of events daily, ensuring 99.9% uptime and cost savings of 30%.
 
