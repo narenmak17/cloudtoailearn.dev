@@ -33,9 +33,9 @@ As a technical and engineering lead, I've successfully managed teams, driven arc
 This blog bridges cloud architecture and AI engineering, sharing practical patterns, hands-on demos, and lessons from production deployments. Whether you're scaling cloud infrastructure or building AI systems, I aim to provide actionable insights.
 
 ### How I Can Help
-- **Guiding**: Platform architecture reviews, cloud strategy, cost optimization
+- **Support & Guide**: Platform architecture development & design work, cloud strategy, cost optimization, Resiliency, AI Pattern & Adoption
 - **Speaking**: Tech talks on cloud, AI, and resilient systems
-- **Mentorship**: Guiding teams on non-functional requirements and best practices
+- **Mentorship**: Guiding teams on Ai Adoption, eventdriven, microservice application design & build best practices
 
 ### Connect With Me
 - [LinkedIn](https://www.linkedin.com/in/narendramak/)
