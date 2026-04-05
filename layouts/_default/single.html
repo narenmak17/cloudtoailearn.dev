@@ -30,9 +30,11 @@
     {{ end }}
 
     <!-- TABLE OF CONTENTS -->
+    {{ if eq .Section "posts" }}
     <div class="toc-container" id="toc">
         <!-- Auto-populated by JavaScript in baseof.html -->
     </div>
+    {{ end }}
 
     <!-- POST BODY -->
     <div class="post-content">
@@ -40,13 +42,16 @@
     </div>
 
     <!-- SOCIAL SHARING -->
+    {{ if eq .Section "posts" }}
     <div class="social-share">
         <p>Share this post:</p>
         <a href="https://twitter.com/intent/tweet?text={{ .Title | urlquery }}&url={{ .Permalink | urlquery }}" target="_blank" class="share-btn twitter">𝕏 Twitter</a>
         <a href="https://www.linkedin.com/sharing/share-offsite/?url={{ .Permalink | urlquery }}" target="_blank" class="share-btn linkedin">in LinkedIn</a>
     </div>
+    {{ end }}
 
     <!-- COMMENTS — Giscus (GitHub Discussions) -->
+    {{ if eq .Section "posts" }}
     <div class="comments-section">
         <h3 class="comments-title">💬 Comments</h3>
         <script src="https://giscus.app/client.js"
@@ -72,6 +77,7 @@
             </p>
         </noscript>
     </div>
+    {{ end }}
 
     <!-- RELATED POSTS -->
     {{ $related := .Site.RegularPages.Related . | first 3 }}
@@ -87,9 +93,11 @@
     {{ end }}
 
     <!-- BACK LINK -->
+    {{ if eq .Section "posts" }}
     <div style="margin-top:2.5rem; padding-top:1.2rem; border-top:1px solid var(--border);">
         <a href="/posts/" style="color:var(--accent); text-decoration:none; font-size:0.88rem; font-weight:500;">← Back to all posts</a>
     </div>
+    {{ end }}
 
 </article>
 {{ end }}
