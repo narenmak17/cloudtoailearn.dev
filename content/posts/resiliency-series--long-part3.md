@@ -1,6 +1,6 @@
 ---
 title: "Building Resilient Systems: Patterns & Implementation — Part 3"
-date: 2026-06-01
+date: 2026-04-05
 draft: false
 author: "Naren"
 description: "Coming soon — Part 3 of the Resiliency Series."
