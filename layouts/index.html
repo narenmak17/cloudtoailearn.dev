@@ -32,7 +32,7 @@
         <a class="read-more" href="{{ .Permalink }}">Read more →</a>
     </li>
     {{ else }}
-    <li style="color:#aaa; padding:2rem 0; text-align:center;">No posts yet. Check back soon!</li>
+    <li style="color:var(--text-muted); padding:2rem 0; text-align:center;">No posts yet. Check back soon!</li>
     {{ end }}
 </ul>
 
@@ -58,7 +58,7 @@
         </a>
         {{ end }}
     </div>
-    <div style="font-size:0.7rem;color:#bbb;margin-top:0.6rem;text-align:center;">Darker = more visits · tracked locally</div>
+    <div style="font-size:0.7rem;color:var(--text-muted);margin-top:0.6rem;text-align:center;">Darker = more visits · tracked locally</div>
 </div>
-<hr class="rp-divider" style="display:block;border:none;border-top:1px solid #f0f0f0;margin:0 0 1rem;">
+<hr class="rp-divider" style="display:block;border:none;border-top:1px solid var(--border);margin:0 0 1rem;">
 {{ end }}

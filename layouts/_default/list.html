@@ -4,7 +4,7 @@
 
 <div style="margin-bottom:1.5rem;">
     <h1 style="font-size:1.6rem; margin-bottom:0.3rem;">All Posts</h1>
-    <p style="color:#aaa; font-size:0.85rem;">{{ len .Pages }} articles on Application & Architecture , AI Systems & hands-on demos</p>
+    <p style="color:var(--text-muted); font-size:0.85rem;">{{ len .Pages }} articles on Application & Architecture , AI Systems & hands-on demos</p>
 </div>
 
 <ul class="post-list">
@@ -30,7 +30,7 @@
         <a class="read-more" href="{{ .Permalink }}">Read more →</a>
     </li>
     {{ else }}
-    <li style="color:#aaa; padding:2rem 0; text-align:center;">No posts published yet.</li>
+    <li style="color:var(--text-muted); padding:2rem 0; text-align:center;">No posts published yet.</li>
     {{ end }}
 </ul>
 

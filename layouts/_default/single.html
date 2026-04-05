@@ -15,7 +15,7 @@
         </div>
         <h1>{{ .Title }}</h1>
         {{ with .Params.description }}
-        <p style="color:#666; font-size:1rem; margin-top:0.5rem; line-height:1.6;">{{ . }}</p>
+        <p style="color:var(--text-secondary); font-size:1rem; margin-top:0.5rem; line-height:1.6;">{{ . }}</p>
         {{ end }}
         <div class="tags" style="margin-top:0.8rem;">
             {{ range .Params.tags }}
@@ -29,10 +29,9 @@
     <img class="post-cover" src="{{ . }}" alt="{{ $.Title }}">
     {{ end }}
 
-    <!-- AD PLACEHOLDER -->
-    <div class="ad-placeholder">
-        <!-- Google AdSense code here -->
-        <p>Advertisement</p>
+    <!-- TABLE OF CONTENTS -->
+    <div class="toc-container" id="toc">
+        <!-- Auto-populated by JavaScript in baseof.html -->
     </div>
 
     <!-- POST BODY -->
@@ -43,25 +42,36 @@
     <!-- SOCIAL SHARING -->
     <div class="social-share">
         <p>Share this post:</p>
-        <a href="https://twitter.com/intent/tweet?text={{ .Title | urlquery }}&url={{ .Permalink | urlquery }}" target="_blank" class="share-btn twitter">Twitter</a>
-        <a href="https://www.linkedin.com/sharing/share-offsite/?url={{ .Permalink | urlquery }}" target="_blank" class="share-btn linkedin">LinkedIn</a>
+        <a href="https://twitter.com/intent/tweet?text={{ .Title | urlquery }}&url={{ .Permalink | urlquery }}" target="_blank" class="share-btn twitter">𝕏 Twitter</a>
+        <a href="https://www.linkedin.com/sharing/share-offsite/?url={{ .Permalink | urlquery }}" target="_blank" class="share-btn linkedin">in LinkedIn</a>
     </div>
 
-    <!-- COMMENTS -->
-    <div id="disqus_thread"></div>
-    <script>
-        var disqus_config = function () {
-            this.page.url = '{{ .Permalink }}';
-            this.page.identifier = '{{ .Permalink }}';
-        };
-        (function() {
-            var d = document, s = d.createElement('script');
-            s.src = 'https://cloudtoailearn.disqus.com/embed.js';
-            s.setAttribute('data-timestamp', +new Date());
-            (d.head || d.body).appendChild(s);
-        })();
-    </script>
-    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <!-- COMMENTS — Giscus (GitHub Discussions) -->
+    <div class="comments-section">
+        <h3 class="comments-title">💬 Comments</h3>
+        <script src="https://giscus.app/client.js"
+            data-repo="narenmak17/cloudtoailearn.dev"
+            data-repo-id=""
+            data-category="Comments"
+            data-category-id=""
+            data-mapping="pathname"
+            data-strict="0"
+            data-reactions-enabled="1"
+            data-emit-metadata="0"
+            data-input-position="top"
+            data-theme="preferred_color_scheme"
+            data-lang="en"
+            data-loading="lazy"
+            crossorigin="anonymous"
+            async>
+        </script>
+        <noscript>
+            <p style="color:var(--text-muted);font-size:0.85rem;">
+                Comments are powered by <a href="https://giscus.app" target="_blank">Giscus</a> (GitHub Discussions).
+                Please enable JavaScript to view comments.
+            </p>
+        </noscript>
+    </div>
 
     <!-- RELATED POSTS -->
     {{ $related := .Site.RegularPages.Related . | first 3 }}
@@ -77,8 +87,8 @@
     {{ end }}
 
     <!-- BACK LINK -->
-    <div style="margin-top:2.5rem; padding-top:1.2rem; border-top:1px solid #f0f0f0;">
-        <a href="/posts/" style="color:#0070f3; text-decoration:none; font-size:0.88rem; font-weight:500;">← Back to all posts</a>
+    <div style="margin-top:2.5rem; padding-top:1.2rem; border-top:1px solid var(--border);">
+        <a href="/posts/" style="color:var(--accent); text-decoration:none; font-size:0.88rem; font-weight:500;">← Back to all posts</a>
     </div>
 
 </article>

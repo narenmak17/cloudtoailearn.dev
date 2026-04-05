@@ -17,6 +17,18 @@ Thumbs.db
 .vscode/
 .idea/
 
-# Scripts
+# Scripts & Guides (local-only)
 fix_theme.bat
 Newpost_guide.txt
+
+# ── Admin Panel (local only, never committed) ──
+admin/
+admin/__pycache__/
+admin/*.pyc
+
+# Python virtual environment
+.venv/
+venv/
+
+# Gemini/AI assistant files
+.gemini/
