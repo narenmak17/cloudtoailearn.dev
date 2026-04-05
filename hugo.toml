@@ -54,4 +54,7 @@ title = 'CloudToAILearn'
   devops = "⚙️ DevOps & SRE"
   security = "🔐 Security"
 
-ignoreLogs = ['goldmark-raw-html']
+ignoreLogs = ['warning-goldmark-raw-html']
+
+[markup.goldmark.renderer]
+  unsafe = true
