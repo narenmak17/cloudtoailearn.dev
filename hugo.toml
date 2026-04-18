@@ -3,10 +3,10 @@ languageCode = 'en-gb'
 title = 'CloudToAILearn'
 
 [params]
-  description = "Thought Leader & Platform Architecture · AI Systems · Hands-on Learning"
+  description = "Thoughtful Leader & AI Enthusiast- Hands-on Learning"
   author = "Naren"
   homeInfoTitle = "Welcome to CloudToAILearn"
-  homeInfoContent = "Practical insights on Application, Cloud Architecture, AI Systems, and hands-on demos by a Platform Architect with 17+ years of experience."
+  homeInfoContent = "Practical insights on Application, Cloud Architecture, AI Systems, and hands-on github demos by a Thoughtful Leader & AI Enthusiast with 17+ years of experience."
 
 [menu]
   [[menu.main]]
@@ -54,7 +54,4 @@ title = 'CloudToAILearn'
   devops = "⚙️ DevOps & SRE"
   security = "🔐 Security"
 
-ignoreLogs = ['warning-goldmark-raw-html']
-
-[markup.goldmark.renderer]
-  unsafe = true
+ignoreLogs = ['goldmark-raw-html']

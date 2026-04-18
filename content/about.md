@@ -8,7 +8,7 @@ draft: false
 
 ![Narendra Makwana](images/author.jpg)
 
-I'm a seasoned **Technical Architect and AWS Platform & Integration Architect** with over 17+ years of experience in IT, specializing in cloud platforms, infrastructure, Applications development, and integration solutions. Recently certified in **AWS AI Cloud Practitioner**, I focus on leading event-driven. microserives application developement & designing activities.
+I'm a seasoned **Platform Lead & Architect** with 17+ years of experience in building resilient cloud systems. Currently focusing on bridging the gap between legacy infrastructure and Generative AI to deliver secure, cost-optimized, and compliant AI solutions for enterprise clients.
 ### Expertise & Skills
 - **Cloud Platforms**: Deep expertise in AWS (EC2, S3, Lambda, EKS, Kinesis), Azure, and GCP, with hands-on experience in hybrid deployments.
 - **Integration & APIs**: Proficient in API Development & design, microservices architecture, and tools like Kafka family,EKS for real-time data streaming.
