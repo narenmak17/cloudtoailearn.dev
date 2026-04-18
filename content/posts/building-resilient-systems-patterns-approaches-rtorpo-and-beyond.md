@@ -6,29 +6,27 @@ categories:
 - cost-optimization
 - devops
 date: '2026-04-16'
-description: We are Nearly there on deep dive on resiliency Pattern - May in this
-  post will focus more on Tolerable Limit and Recovery Point Objective and why those
-  matter on Architecting the DR Strategy for Infra failures !!!
+description: We are Nearly there on deep dive on resiliency Pattern - In this post
+  will focus more on Tolerable Limit and Recovery Point Objective and why those matter
+  on Architecting the DR Strategy for Infra failures !!!
 draft: false
 series:
 - Resiliency Series
 - RTO-RPO
 tags:
-- ai
-- ai-infrastructure
+- disaster-recovery
+- dr
 - aws
 - cloud-architecture
 - distributed-systems
-- gradio
-- hands-on
-- huggingface
 - kubernetes
-- llm
-- mlops
 - patterns
 - python
 - resiliency
 - sre
+- architecture
+- aws
+- multi-region
 title: 'Building Resilient Systems: Patterns & Approaches | RTO/RPO and Beyond'
 ---
 
@@ -78,7 +76,7 @@ If you can tolerate 30 minutes of downtime during a regional failure, you don't 
 
 ![Decision framework](/images/posts/resiliency/rto-rpo/RTO-RPO-DecisionTree.png)
 
-##### Real World Example for there Resiliency need and Reality !!!
+##### Real World Example for a Resiliency need of a medium size company vs Reality !!!
 
 ![Real World Example](/images/posts/resiliency/rto-rpo/rto-rpo-realworld-eample.png)
 
